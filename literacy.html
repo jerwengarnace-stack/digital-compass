@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Literacy - Digital Compass</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="logo">Digital Compass</div>
-        <nav>
+        <button class="menu-toggle" id="menu-toggle">Menu</button>
+        
+        <nav id="desktop-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="safety.html">Cyber Safety</a></li>
@@ -21,14 +24,23 @@
         </nav>
     </header>
 
+    <div id="mobile-nav-links">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="safety.html">Cyber Safety</a></li>
+            <li><a href="literacy.html">Digital Literacy</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </div>
+
     <div class="page-container">
         
         <aside class="sidebar">
             <h2>Digital Literacy Topics</h2>
             <ul>
-                <li><a href="#" class="nav-link active" data-target="digital-footprint">Your Digital Footprint</a></li>
+                <li><a href="https://www.kaspersky.com/resource-center/definitions/what-is-a-digital-footprint" class="nav-link active" data-target="digital-footprint">Your Digital Footprint</a></li>
                 <li><a href="#" class="nav-link" data-target="media-bias">Media Bias & Sourcing</a></li>
-                <li><a href="#" class="nav-link" data-target="netiquette">Online Etiquette (Netiquette)</a></li>
+                <li><a href="https://www.kaspersky.com/resource-center/preemptive-safety/what-is-netiquette" class="nav-link" data-target="netiquette">Online Etiquette (Netiquette)</a></li>
             </ul>
         </aside>
 
@@ -51,7 +63,7 @@
                     Rule of Thumb: Before you post, ask yourself: Would I be comfortable with my future employer or a university admissions officer seeing this?
                 </p>
 
-                <a href="#" class="button primary">Check Your Social Media Privacy Settings</a>
+                <a href="https://privacy.kaspersky.com/" class="button primary">Check Your Social Media Privacy Settings</a>
             </section>
             
             <hr>
@@ -79,6 +91,42 @@
         <p>&copy; 2025 Digital Compass. Project Title: Digital Compass: Navigating Cyber Safety and Literacy.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileNav = document.getElementById('mobile-nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+            function setupMobileMenu() {
+                if (mediaQuery.matches) {
+                    mobileNav.style.display = 'none'; // Force hide on mobile load
+
+                    toggleBtn.onclick = () => {
+                        const isHidden = mobileNav.style.display === 'none';
+                        mobileNav.style.display = isHidden ? 'block' : 'none';
+                        toggleBtn.textContent = isHidden ? 'Menu X' : 'Menu'; 
+                    };
+                    
+                    // Close menu if a link is clicked
+                    mobileNav.querySelectorAll('a').forEach(link => {
+                        link.onclick = () => {
+                            if (window.innerWidth <= 768) {
+                                mobileNav.style.display = 'none';
+                                toggleBtn.textContent = 'Menu';
+                            }
+                        };
+                    });
+                } else {
+                    mobileNav.style.display = 'none'; // Ensure it's hidden on desktop
+                    toggleBtn.textContent = 'Menu'; // Reset text on desktop view
+                }
+            }
+            
+            setupMobileMenu();
+            mediaQuery.addListener(setupMobileMenu);
+        });
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
