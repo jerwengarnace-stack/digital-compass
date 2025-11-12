@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources - Digital Compass</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="logo">Digital Compass</div>
-        <nav>
+        <button class="menu-toggle" id="menu-toggle">Menu</button>
+        
+        <nav id="desktop-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="safety.html">Cyber Safety</a></li>
@@ -20,6 +23,15 @@
             </ul>
         </nav>
     </header>
+
+    <div id="mobile-nav-links">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="safety.html">Cyber Safety</a></li>
+            <li><a href="literacy.html">Digital Literacy</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </div>
 
     <div class="page-container">
         
@@ -63,8 +75,8 @@
                 <h2>📺 Educational Videos</h2>
                 <p>Visual content that explains complex topics in a simple, engaging way.</p>
                 <ul>
-                    <li><a href="#" target="_blank">Video: What is Phishing?</a> (Insert actual link)</li>
-                    <li><a href="#" target="_blank">Video: Building Your Digital Footprint</a> (Insert actual link)</li>
+                    <li><a href="https://youtu.be/XBkzBrXlle0?si=qSrTe-HsyyD6NQFT" target="_blank">Video: What is Phishing?</a></li>
+                    <li><a href="https://youtu.be/AdWmhZsJQHo?si=Kft6rbkMWlEAGuhA" target="_blank">Video: Building Your Digital Footprint</a></li>
                 </ul>
             </section>
         </main>
@@ -74,6 +86,42 @@
         <p>&copy; 2025 Digital Compass. Project Title: Digital Compass: Navigating Cyber Safety and Literacy.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileNav = document.getElementById('mobile-nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+            function setupMobileMenu() {
+                if (mediaQuery.matches) {
+                    mobileNav.style.display = 'none'; // Force hide on mobile load
+
+                    toggleBtn.onclick = () => {
+                        const isHidden = mobileNav.style.display === 'none';
+                        mobileNav.style.display = isHidden ? 'block' : 'none';
+                        toggleBtn.textContent = isHidden ? 'Menu X' : 'Menu'; 
+                    };
+                    
+                    // Close menu if a link is clicked
+                    mobileNav.querySelectorAll('a').forEach(link => {
+                        link.onclick = () => {
+                            if (window.innerWidth <= 768) {
+                                mobileNav.style.display = 'none';
+                                toggleBtn.textContent = 'Menu';
+                            }
+                        };
+                    });
+                } else {
+                    mobileNav.style.display = 'none';
+                    toggleBtn.textContent = 'Menu'; 
+                }
+            }
+            
+            setupMobileMenu();
+            mediaQuery.addListener(setupMobileMenu);
+        });
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
