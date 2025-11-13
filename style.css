@@ -1,0 +1,328 @@
+:root {
+    --color-primary: #003366;
+    --color-secondary: #4CAF50;
+    --color-accent: #FF6600;
+    --color-background: #F4F4F4;
+    --color-text: #333;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+/* Updated header structure */
+header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 15px 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative; 
+}
+
+/* MODIFIED: Added spacing for the icon */
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    padding-left: 28px; /* Space for the icon */
+    position: relative; 
+}
+
+/* NEW: Icon styling (Compass icon) */
+.logo::before {
+    content: "\f14e"; /* Font Awesome solid compass icon code */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900; 
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: var(--color-secondary); /* Green color */
+}
+
+/* Desktop Navigation (Visible by default) */
+#desktop-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+#desktop-nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 8px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+#desktop-nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Menu Toggle Button (Hidden by default on PC) */
+.menu-toggle {
+    display: none; 
+    background: none;
+    border: 1px solid white;
+    color: white;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Mobile Navigation Container (Toggled by JS) */
+#mobile-nav-links {
+    display: none; /* Key: This is toggled by JavaScript */
+    background-color: var(--color-primary); 
+    width: 100%;
+    position: absolute; 
+    top: 60px; /* Position right below the header */
+    left: 0;
+    z-index: 99;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+/* Mobile Menu Links Styling */
+#mobile-nav-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Vertical list */
+}
+
+#mobile-nav-links ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+#mobile-nav-links ul li:last-child a {
+    border-bottom: none;
+}
+
+#mobile-nav-links ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.button.primary {
+    background-color: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+}
+
+.button.primary:hover {
+    background-color: #004080;
+    transform: translateY(-2px);
+}
+
+.hero {
+    background-color: var(--color-background); 
+    padding: 100px 50px;
+    text-align: center;
+    border-bottom: 3px solid var(--color-secondary);
+}
+
+.quick-links {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-shrink: 0;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+    white-space: normal;
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    color: var(--color-primary);
+}
+
+.page-container {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 20px 20px;
+    width: 100%;
+    min-height: calc(100vh - 120px); 
+}
+
+.content-area-home {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: var(--color-background);
+    border-right: 1px solid #ddd;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+
+.sidebar h2 {
+    color: var(--color-primary);
+    margin-top: 0;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--color-secondary);
+    border-bottom: 1px dashed #ccc;
+    transition: color 0.2s, font-weight 0.2s;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a.active {
+    color: var(--color-accent);
+    font-weight: 700;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 7px;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 0 40px;
+}
+
+.warning-text {
+    background-color: #fff0e8;
+    border-left: 5px solid var(--color-accent);
+    padding: 15px;
+    margin: 20px 0;
+    color: #444;
+}
+
+footer {
+    flex-shrink: 0;
+    margin-top: 0;
+    background-color: var(--color-text);
+    color: var(--color-background);
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+/* ---------------------------------------------------- */
+/* MEDIA QUERY - Mobile adjustments (Applies only below 768px) */
+/* ---------------------------------------------------- */
+@media (max-width: 768px) {
+    
+    /* Hide the standard desktop navigation */
+    #desktop-nav {
+        display: none;
+    }
+    
+    /* Show the menu toggle button */
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* Mobile Layout adjustments */
+    .page-container {
+        flex-direction: column;
+        padding: 0 10px;
+        min-height: auto; 
+    }
+
+    .content-area {
+        padding: 20px 20px 40px;
+        min-height: 70vh; 
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .quick-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 10px;
+        white-space: normal;
+        overflow-x: hidden;
+    }
+    
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    /* Ensure header remains aligned properly in mobile */
+    header {
+        flex-direction: row; 
+        align-items: center;
+        padding: 10px 20px;
+    }
+}

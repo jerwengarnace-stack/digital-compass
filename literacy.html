@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Literacy - Digital Compass</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Digital Compass</div>
+        <button class="menu-toggle" id="menu-toggle">Menu</button>
+        
+        <nav id="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Cyber Safety</a></li>
+                <li><a href="literacy.html" aria-current="page">Digital Literacy</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="mobile-nav-links">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="safety.html">Cyber Safety</a></li>
+            <li><a href="literacy.html">Digital Literacy</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </div>
+
+    <div class="page-container">
+        
+        <aside class="sidebar">
+            <h2>Digital Literacy Topics</h2>
+            <ul>
+                <li><a href="https://www.kaspersky.com/resource-center/definitions/what-is-a-digital-footprint" class="nav-link active" data-target="digital-footprint">Your Digital Footprint</a></li>
+                <li><a href="#" class="nav-link" data-target="media-bias">Media Bias & Sourcing</a></li>
+                <li><a href="https://www.kaspersky.com/resource-center/preemptive-safety/what-is-netiquette" class="nav-link" data-target="netiquette">Online Etiquette (Netiquette)</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <h1>Building Digital Literacy</h1>
+            <p>Develop the skills needed to use technology and the internet effectively, responsibly, and critically.</p>
+
+            <section id="digital-footprint" class="content-section">
+                <h2>👣 Understanding Your Digital Footprint</h2>
+                <p>Your digital footprint is the unique trail of data you leave behind whenever you use the internet. This includes your social media activity, emails, browsing history, and online purchases.</p>
+
+                <h3>Passive vs. Active Footprints:</h3>
+                <ul>
+                    <li>Passive Footprint: Data collected without your explicit knowledge (e.g., IP address, geolocation).</li>
+                    <li>Active Footprint: Data you deliberately share (e.g., posting photos, writing reviews, filling out online forms).</li>
+                </ul>
+                
+                <h3>Managing Your Footprint:</h3>
+                <p style="background-color: #e8f5e9; padding: 15px; border-radius: 5px;">
+                    Rule of Thumb: Before you post, ask yourself: Would I be comfortable with my future employer or a university admissions officer seeing this?
+                </p>
+
+                <a href="https://privacy.kaspersky.com/" class="button primary">Check Your Social Media Privacy Settings</a>
+            </section>
+            
+            <hr>
+
+            <section id="media-bias" class="content-section">
+                <h2>📰 Media Bias & Sourcing</h2>
+                <p>In the age of information, critical evaluation of sources is vital. Learn to spot bias, differentiate facts from opinions, and verify information from multiple reputable sources.</p>
+                </section>
+
+            <hr>
+            
+            <section id="netiquette" class="content-section">
+                <h2>🤝 Online Etiquette (Netiquette)</h2>
+                <p>Netiquette refers to the rules of polite behavior when communicating over the Internet. It's about respecting other users' time, privacy, and opinions.</p>
+                <ul>
+                    <li>Be Patient: Don't expect instant responses.</li>
+                    <li>Be Concise: Keep messages short and to the point.</li>
+                    <li>Avoid SHOUTING: Using all capital letters is seen as aggressive.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Digital Compass. Project Title: Digital Compass: Navigating Cyber Safety and Literacy.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileNav = document.getElementById('mobile-nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+            function setupMobileMenu() {
+                if (mediaQuery.matches) {
+                    mobileNav.style.display = 'none'; // Force hide on mobile load
+
+                    toggleBtn.onclick = () => {
+                        const isHidden = mobileNav.style.display === 'none';
+                        mobileNav.style.display = isHidden ? 'block' : 'none';
+                        toggleBtn.textContent = isHidden ? 'Menu X' : 'Menu'; 
+                    };
+                    
+                    // Close menu if a link is clicked
+                    mobileNav.querySelectorAll('a').forEach(link => {
+                        link.onclick = () => {
+                            if (window.innerWidth <= 768) {
+                                mobileNav.style.display = 'none';
+                                toggleBtn.textContent = 'Menu';
+                            }
+                        };
+                    });
+                } else {
+                    mobileNav.style.display = 'none'; // Ensure it's hidden on desktop
+                    toggleBtn.textContent = 'Menu'; // Reset text on desktop view
+                }
+            }
+            
+            setupMobileMenu();
+            mediaQuery.addListener(setupMobileMenu);
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            function showSection(targetId) {
+
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+
+
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.nav-link[data-target="${targetId}"]`).classList.add('active');
+            }
+
+
+            const initialTarget = document.querySelector('.nav-link.active')?.getAttribute('data-target') || 'digital-footprint';
+            showSection(initialTarget);
+
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    const targetId = this.getAttribute('data-target');
+                    showSection(targetId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

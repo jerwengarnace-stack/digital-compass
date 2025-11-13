@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Digital Compass</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Digital Compass</div>
+        <button class="menu-toggle" id="menu-toggle">Menu</button>
+        
+        <nav id="desktop-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="safety.html">Cyber Safety</a></li>
+                <li><a href="literacy.html">Digital Literacy</a></li>
+                <li><a href="resources.html" aria-current="page">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="mobile-nav-links">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="safety.html">Cyber Safety</a></li>
+            <li><a href="literacy.html">Digital Literacy</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    </div>
+
+    <div class="page-container">
+        
+        <aside class="sidebar">
+            <h2>Resource Categories</h2>
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="safety-tools">Safety Tools & Checklists</a></li>
+                <li><a href="#" class="nav-link" data-target="literacy-guides">Literacy Guides</a></li>
+                <li><a href="#" class="nav-link" data-target="educational-videos">Educational Videos</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <h1>Recommended Resources</h1>
+            <p>A curated collection of external links, tools, and organizations to help you continue your learning journey in digital literacy and cyber safety.</p>
+
+            <section id="safety-tools" class="content-section">
+                <h2>🛡️ Safety Tools & Checklists</h2>
+                <p>These external resources provide practical tools to immediately improve your security.</p>
+                <ul>
+                    <li><a href="https://www.ftc.gov/" target="_blank">Federal Trade Commission (FTC)</a>: Consumer guidance on identity theft and scams.</li>
+                    <li><a href="https://haveibeenpwned.com/" target="_blank">Have I Been Pawned?</a>: Check if your email or phone number has been compromised in a data breach.</li>
+                    <li><a href="https://www.usa.gov/password-safety" target="_blank">CISA Password Guidelines</a>: Best practices for creating and managing complex passwords.</li>
+                </ul>
+            </section>
+            
+            <hr>
+
+            <section id="literacy-guides" class="content-section">
+                <h2>🧠 Digital Literacy Guides</h2>
+                <p>Learn how to critically evaluate online sources and understand digital etiquette.</p>
+                <ul>
+                    <li><a href="https://newslit.org/" target="_blank">News Literacy Project</a>: Tools and resources for spotting misinformation and bias.</li>
+                    <li><a href="https://www.commonsensemedia.org/about-us/our-mission" target="_blank">Common Sense Media</a>: Focus on digital citizenship, especially for younger audiences.</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section id="educational-videos" class="content-section">
+                <h2>📺 Educational Videos</h2>
+                <p>Visual content that explains complex topics in a simple, engaging way.</p>
+                <ul>
+                    <li><a href="https://youtu.be/XBkzBrXlle0?si=qSrTe-HsyyD6NQFT" target="_blank">Video: What is Phishing?</a></li>
+                    <li><a href="https://youtu.be/AdWmhZsJQHo?si=Kft6rbkMWlEAGuhA" target="_blank">Video: Building Your Digital Footprint</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Digital Compass. Project Title: Digital Compass: Navigating Cyber Safety and Literacy.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileNav = document.getElementById('mobile-nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+            function setupMobileMenu() {
+                if (mediaQuery.matches) {
+                    mobileNav.style.display = 'none'; // Force hide on mobile load
+
+                    toggleBtn.onclick = () => {
+                        const isHidden = mobileNav.style.display === 'none';
+                        mobileNav.style.display = isHidden ? 'block' : 'none';
+                        toggleBtn.textContent = isHidden ? 'Menu X' : 'Menu'; 
+                    };
+                    
+                    // Close menu if a link is clicked
+                    mobileNav.querySelectorAll('a').forEach(link => {
+                        link.onclick = () => {
+                            if (window.innerWidth <= 768) {
+                                mobileNav.style.display = 'none';
+                                toggleBtn.textContent = 'Menu';
+                            }
+                        };
+                    });
+                } else {
+                    mobileNav.style.display = 'none';
+                    toggleBtn.textContent = 'Menu'; 
+                }
+            }
+            
+            setupMobileMenu();
+            mediaQuery.addListener(setupMobileMenu);
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            function showSection(targetId) {
+
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+
+
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.nav-link[data-target="${targetId}"]`).classList.add('active');
+            }
+
+
+            const initialTarget = document.querySelector('.nav-link.active')?.getAttribute('data-target') || 'safety-tools';
+            showSection(initialTarget);
+
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    const targetId = this.getAttribute('data-target');
+                    showSection(targetId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
